@@ -17,8 +17,9 @@ class Folder: NSObject, NSCoding{
     
     var name: String
     var parent: Folder?
-    var folders: [Folder] = []
-    var recordings: [Recording] = []
+    var folders: [Folder]? = []
+    var recordings: [Recording]? = []
+    var shown: Bool
     
     
     // MARK: Archiving Paths
@@ -35,18 +36,20 @@ class Folder: NSObject, NSCoding{
         static let parentKey = "parent"
         static let foldersKey = "folders"
         static let recordingsKey = "recordings"
+        static let shownKey = "shown"
     }
     
     // MARK: Initialization
     
-    init(name: String, parent: Folder?, folders: [Folder], recordings: [Recording]) {
+    init(name: String, parent: Folder?, folders: [Folder]?, recordings: [Recording]?, shown: Bool) {
         
         // Initialize stored parameters
         
         self.name = name
         self.parent = parent
-        self.folders += folders
-        self.recordings += recordings
+        self.folders = folders
+        self.recordings = recordings
+        self.shown = shown
         
         super.init() //For NSObject
     }
@@ -59,6 +62,7 @@ class Folder: NSObject, NSCoding{
         aCoder.encodeObject(parent, forKey:PropertyKey.parentKey)
         aCoder.encodeObject(folders, forKey:PropertyKey.foldersKey)
         aCoder.encodeObject(recordings, forKey:PropertyKey.recordingsKey)
+        aCoder.encodeObject(shown, forKey:PropertyKey.shownKey)
  
     }
     
@@ -78,12 +82,30 @@ class Folder: NSObject, NSCoding{
         
         let folders = aDecoder.decodeObjectForKey(PropertyKey.foldersKey) as? [Folder]
         
-        let recordings = aDecoder.decodeObjectForKey(PropertyKey.recordingsKey) as! [Recording]
+        let recordings = aDecoder.decodeObjectForKey(PropertyKey.recordingsKey) as? [Recording]
+        
+        let shown = aDecoder.decodeObjectForKey(PropertyKey.shownKey) as! Bool
         
         
         // Must call designated initializer
-        self.init(name: name, parent:parent, folders:folders, recordings:recordings)
+        self.init(name: name, parent:parent, folders:folders, recordings:recordings, shown:shown)
     }
     
+    // MARK: Helpful Funcitons
     
+    // Used in ArhiveTableViewController to simplify code to determine number of rows.
+    // Only pass an actual folder or recording, not both
+    
+    func isNil(folder: Folder?, recording: Recording?) -> Int {
+        
+        if(folder == nil && recording == nil){
+            return 0
+        }
+        
+        if(folder != nil || recording != nil){
+            return 1
+        }
+        
+        return -1 //shouldn't ever reach here
+    }
 }

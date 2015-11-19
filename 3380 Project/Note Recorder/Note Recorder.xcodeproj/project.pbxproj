@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E2496F3B1BFD71AF000F373F /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2496F3A1BFD71AF000F373F /* Folder.swift */; settings = {ASSET_TAGS = (); }; };
+		E2496F3D1BFD75DA000F373F /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2496F3C1BFD75DA000F373F /* Recording.swift */; settings = {ASSET_TAGS = (); }; };
+		E2496F3E1BFD75DA000F373F /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2496F3C1BFD75DA000F373F /* Recording.swift */; settings = {ASSET_TAGS = (); }; };
 		E2C96E1A1BFB15300032D764 /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C96E191BFB15300032D764 /* EditorViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		E2C96E1C1BFB16310032D764 /* ArchiveFolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C96E1B1BFB16310032D764 /* ArchiveFolderTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		E2E1B5841BFAE24500B878E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E1B5831BFAE24500B878E6 /* AppDelegate.swift */; };
@@ -30,6 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E2496F3A1BFD71AF000F373F /* Folder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Folder.swift; path = "Note Recorder/Folder.swift"; sourceTree = "<group>"; };
+		E2496F3C1BFD75DA000F373F /* Recording.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
 		E2C96E191BFB15300032D764 /* EditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditorViewController.swift; path = Editor/EditorViewController.swift; sourceTree = "<group>"; };
 		E2C96E1B1BFB16310032D764 /* ArchiveFolderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArchiveFolderTableViewCell.swift; path = Archive/ArchiveFolderTableViewCell.swift; sourceTree = "<group>"; };
 		E2E1B5801BFAE24500B878E6 /* Note Recorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Note Recorder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +72,8 @@
 		E2E1B5771BFAE24400B878E6 = {
 			isa = PBXGroup;
 			children = (
+				E2496F3C1BFD75DA000F373F /* Recording.swift */,
+				E2496F3A1BFD71AF000F373F /* Folder.swift */,
 				E2E1B5821BFAE24500B878E6 /* Note Recorder */,
 				E2E1B5971BFAE24500B878E6 /* Note RecorderTests */,
 				E2E1B5811BFAE24500B878E6 /* Products */,
@@ -238,6 +245,8 @@
 				E2C96E1A1BFB15300032D764 /* EditorViewController.swift in Sources */,
 				E2C96E1C1BFB16310032D764 /* ArchiveFolderTableViewCell.swift in Sources */,
 				E2E1B5841BFAE24500B878E6 /* AppDelegate.swift in Sources */,
+				E2496F3B1BFD71AF000F373F /* Folder.swift in Sources */,
+				E2496F3D1BFD75DA000F373F /* Recording.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2E1B5991BFAE24500B878E6 /* Note_RecorderTests.swift in Sources */,
+				E2496F3E1BFD75DA000F373F /* Recording.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

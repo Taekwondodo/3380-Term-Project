@@ -13,7 +13,7 @@ class Recording{
     // MARK: Properties
     
     var name: String
-    var pins: [Pins] = []
+    //var pins: [Pins] = [] removed for testing purposes
     
     
     // MARK: Types
@@ -30,12 +30,12 @@ class Recording{
     
     // MARK: Initialization
     
-    init(name: String, pins: [Pins]) {
+    init(name: String) {
         
         // Initialize stored parameters
         
         self.name = name
-        self.pins += pins
+        //self.pins += pins
      
         
     }

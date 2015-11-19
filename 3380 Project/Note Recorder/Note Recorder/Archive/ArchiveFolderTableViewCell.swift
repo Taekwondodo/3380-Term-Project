@@ -10,8 +10,7 @@ import UIKit
 
 class ArchiveFolderTableViewCell: UITableViewCell {
 
-    
-    
+    var folder: Folder!
     @IBOutlet weak var folderLabel: UILabel!
     
     

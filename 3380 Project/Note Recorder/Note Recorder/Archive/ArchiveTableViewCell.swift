@@ -10,7 +10,7 @@ import UIKit
 
 class ArchiveTableViewCell: UITableViewCell {
 
-    
+    var recording: Recording!
     @IBOutlet weak var titleLabel: UILabel!
   
     
