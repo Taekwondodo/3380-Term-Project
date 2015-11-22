@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ArchiveTableViewController: UITableViewController{
+class ArchiveTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate{
 
     
     // MARK: Properties
@@ -17,12 +17,23 @@ class ArchiveTableViewController: UITableViewController{
     var rootFolder: Folder!
     var currentFolder: Folder!
     var folderCount = 0
-    
+    var addButton: UIBarButtonItem!
+    var addFolder = 0 //Essentially a flag for if we're adding a new folder or not
+
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        rootFolder = Folder(name: "Root", parent: nil, folders: nil, recordings: nil, shown: true)
+        addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addFolder:")
+        self.navigationItem.rightBarButtonItems = [addButton]
+        
+        // May not need all of this root setup when we're loading data from memory
+        
+        let rootFolderArray: [Folder] = []
+        let rootRecordingArray: [Recording] = []
+        
+        rootFolder = Folder(name: "Root", parent: nil, folders: rootFolderArray, recordings: rootRecordingArray)
         
         loadTestData()
         
@@ -42,9 +53,12 @@ class ArchiveTableViewController: UITableViewController{
     }
     
     
-    func loadTestData(){
+    func loadTestData(){ // for testing purposes, will be removed in final version
         
-        let dummyFolder = Folder(name: "", parent: nil, folders: nil, recordings: nil, shown:false)
+        let emptyFolder: [Folder] = []
+        let emptyRecording: [Recording] = []
+        
+        let dummyFolder = Folder(name: "empty1", parent: rootFolder, folders: emptyFolder, recordings: emptyRecording)
         let dummyArray = [dummyFolder, dummyFolder]
         let tempRecording1 = Recording(name: "sub1")
         let tempRecording2 = Recording(name: "sub2")
@@ -53,8 +67,8 @@ class ArchiveTableViewController: UITableViewController{
         tempRecording2.name = "4"
         let recordingArray2: [Recording] = [tempRecording1, tempRecording2]
         
-        let tempFolder1 = Folder(name: "1", parent: rootFolder, folders: dummyArray, recordings: recordingArray, shown: false)
-        let tempFolder2 = Folder(name: "2", parent: rootFolder, folders: dummyArray, recordings: recordingArray2, shown: false)
+        let tempFolder1 = Folder(name: "1", parent: rootFolder, folders: dummyArray, recordings: recordingArray)
+        let tempFolder2 = Folder(name: "2", parent: rootFolder, folders: dummyArray, recordings: recordingArray2)
         let folderArray: [Folder] = [tempFolder1, tempFolder2]
      
         rootFolder.folders = folderArray
@@ -64,38 +78,47 @@ class ArchiveTableViewController: UITableViewController{
     
 
     // MARK: - Table view data source
+    
+    // Determines the number of sections in the tableView
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
    
         return 1
     }
 
+    // Determines the number of rows for the tableView
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        folderCount = 0
-        // TODO
+        folderCount = 0 // Initialized here, used when configuring rows
+        
         if(currentFolder.parent == nil){ //root folder
-            return currentFolder.folders!.count + currentFolder.recordings!.count
+            return currentFolder.folders.count + currentFolder.recordings.count + addFolder
         }
         
-        if(currentFolder.recordings == nil){ //Folder contains no recordings
-            return currentFolder.folders!.count
-        }
-        
-        if(currentFolder.folders == nil){ //Folder contains no folders
-            return currentFolder.recordings!.count
-        }
-        
-        return currentFolder.folders!.count + currentFolder.recordings!.count + 1 //Includes parent so you can navigate back
+        return currentFolder.folders.count + currentFolder.recordings.count + 1 + addFolder //Includes parent so you can navigate back
         
     }
 
+    // Configures the rows for the tableView
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        // Adds a row to the top of the tableView if a folder is being added
+        
+        if(addFolder == 1){
+            
+            let cellIdentifier = "ArchiveNewFolderTableViewCell"
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ArchiveNewFolderTableViewCell
+            
+            return cell
+        
+        }
+        
         //If the folder has a parent, include it as the top row so you can navigate back
         
-        if(indexPath.row == 0 && currentFolder.parent != nil){
+        if((indexPath.row == 0 && currentFolder.parent != nil) || (indexPath.row == 1 && currentFolder.parent != nil && addFolder == 1)){
             
             // Table view cells are reused and should be dequeued using a cell identifer
             
@@ -103,12 +126,12 @@ class ArchiveTableViewController: UITableViewController{
             
             let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ArchiveFolderTableViewCell
             
-            // Fetches the appropriate data for the data source layout
+            // Fetches the appropriate data for the parent row
             
             let title = currentFolder.parent!.name
             let folder = currentFolder.parent!
             
-            cell.folderLabel.text = title + " (Return)"
+            cell.folderLabel.text = title + " (Back)"
             cell.folder = folder
             
             return cell
@@ -116,7 +139,7 @@ class ArchiveTableViewController: UITableViewController{
         
         // Add folder rows if necessary
         
-        if(folderCount < currentFolder.folders?.count){
+        if(folderCount < currentFolder.folders.count){
             
             
             // Table view cells are reused and should be dequeued using a cell identifer
@@ -127,8 +150,8 @@ class ArchiveTableViewController: UITableViewController{
             
             // Fetches the appropriate data for the data source layout
             
-            let title = currentFolder.folders![folderCount].name
-            let folder = currentFolder.folders![folderCount]
+            let title = currentFolder.folders[folderCount].name
+            let folder = currentFolder.folders[folderCount]
             
             cell.folderLabel.text = title
             cell.folder = folder
@@ -140,10 +163,10 @@ class ArchiveTableViewController: UITableViewController{
         }
         
         // Add recordings rows if necessary
-        // We want to use indexPath.row to get our recording array element, however we need to account for any folder rows that have been inserted so we subtract from indexPath the # of rows that we have created prior to this
+        // We want to use indexPath.row to get our recording array element, however we need to account for any folder rows that have been inserted so we subtract from indexPath the # of rows that we have created prior to this to get our desired element in the recording array
         
-        var adjustedRowIndex = indexPath.row - currentFolder.folders!.count
-        if(currentFolder.parent != nil){
+        var adjustedRowIndex = indexPath.row - currentFolder.folders.count + addFolder // Subtracts based on folder rows inserted
+        if(currentFolder.parent != nil){ // Subtracts if there is a parent row
             
             adjustedRowIndex -= 1
         }
@@ -156,8 +179,8 @@ class ArchiveTableViewController: UITableViewController{
         
         // Fetches the appropriate data for the data source layout
         
-        let title = currentFolder.recordings![adjustedRowIndex].name
-        let recording = currentFolder.recordings![adjustedRowIndex]
+        let title = currentFolder.recordings[adjustedRowIndex].name
+        let recording = currentFolder.recordings[adjustedRowIndex]
         
         cell.titleLabel.text = title
         cell.recording = recording
@@ -167,26 +190,51 @@ class ArchiveTableViewController: UITableViewController{
     }
     
     
-    /*
+    
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
+        
+        // We don't want the backwards navigation row to be able to be edited
+        
+        if (currentFolder.parent != nil && indexPath.row == 0){
+            return false
+        }
+        
         return true
     }
-    */
     
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+    
+        
+        
+        return UITableViewCellEditingStyle.Delete
+    }
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
+            
             // Delete the row from the data source
+            
+            // If the row is a folder, otherwise it's a recording
+            
+            if let _ = tableView.cellForRowAtIndexPath(indexPath) as? ArchiveFolderTableViewCell{
+                currentFolder.folders.removeAtIndex(indexPath.row)
+            }
+            else{
+                currentFolder.recordings.removeAtIndex(indexPath.row - currentFolder.folders.count)
+            }
+            
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+            
+            
         }    
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.
@@ -214,37 +262,107 @@ class ArchiveTableViewController: UITableViewController{
             currentFolder = selectedCell.folder
             
             tableView.reloadData()
-            /*
-            selectedFolder.shown = true
-            var indexPaths: [NSIndexPath]
-            
-                
-            for folder in selectedFolder.folders! {
-                
-                tableView.insertRowsAtIndexPaths(_ indexPaths: [NSIndexPath],
-                    withRowAnimation animation: UITableViewRowAnimation)
-            }
-            
-            
-            */
-            
         }
+        
         
         return indexPath
     }
 
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        let popOver = segue.destinationViewController.popoverPresentationController
+        
+        popOver?.sourceRect = popOver!.sourceView!.bounds;
     }
-    */
+    
+    
+    
+    func addFolder(sender: UIBarButtonItem) {
+        
+        addFolder = 1
+        
+        tableView.beginUpdates()
+        
+        let indexPath: [NSIndexPath] = [NSIndexPath(forRow: 0, inSection: 0)]
+
+        tableView.insertRowsAtIndexPaths(indexPath, withRowAnimation: .Top)
+        
+        tableView.endUpdates()
+        
+        addFolder = 0
+        
+        /*
+        let popoverViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EnterTextUIViewController") as UIViewController?
+        popoverViewController?.modalPresentationStyle = UIModalPresentationStyle.Popover
+        
+        let popOver = self.popoverPresentationController
+        popOver!.permittedArrowDirections = .Any
+        popOver!.delegate = self
+        popOver!.barButtonItem = sender as UIBarButtonItem
+        popOver!.popoverLayoutMargins = UIEdgeInsetsMake(300, 300, 300, 300)
+        
+        
+        presentViewController(popoverViewController!, animated: true, completion: nil)
+        
+        
+        self.performSegueWithIdentifier("enterFolderName", sender: addButton)
+        */
+    }
+    
+    //func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+  //      return .None
+    //}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

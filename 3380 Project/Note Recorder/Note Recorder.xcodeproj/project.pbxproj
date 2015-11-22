@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E23622301C016FBF00DC30C1 /* EnterTextUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236222F1C016FBF00DC30C1 /* EnterTextUIViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		E2496F3B1BFD71AF000F373F /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2496F3A1BFD71AF000F373F /* Folder.swift */; settings = {ASSET_TAGS = (); }; };
 		E2496F3D1BFD75DA000F373F /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2496F3C1BFD75DA000F373F /* Recording.swift */; settings = {ASSET_TAGS = (); }; };
 		E2496F3E1BFD75DA000F373F /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2496F3C1BFD75DA000F373F /* Recording.swift */; settings = {ASSET_TAGS = (); }; };
 		E2C96E1A1BFB15300032D764 /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C96E191BFB15300032D764 /* EditorViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		E2C96E1C1BFB16310032D764 /* ArchiveFolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C96E1B1BFB16310032D764 /* ArchiveFolderTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		E2DF1BE91C0272D100F14F99 /* ArchiveNewFolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DF1BE81C0272D100F14F99 /* ArchiveNewFolderTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		E2E1B5841BFAE24500B878E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E1B5831BFAE24500B878E6 /* AppDelegate.swift */; };
 		E2E1B5861BFAE24500B878E6 /* RecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E1B5851BFAE24500B878E6 /* RecorderViewController.swift */; };
 		E2E1B5891BFAE24500B878E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2E1B5871BFAE24500B878E6 /* Main.storyboard */; };
@@ -33,10 +35,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E236222F1C016FBF00DC30C1 /* EnterTextUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterTextUIViewController.swift; sourceTree = "<group>"; };
 		E2496F3A1BFD71AF000F373F /* Folder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Folder.swift; path = "Note Recorder/Folder.swift"; sourceTree = "<group>"; };
 		E2496F3C1BFD75DA000F373F /* Recording.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
 		E2C96E191BFB15300032D764 /* EditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditorViewController.swift; path = Editor/EditorViewController.swift; sourceTree = "<group>"; };
 		E2C96E1B1BFB16310032D764 /* ArchiveFolderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArchiveFolderTableViewCell.swift; path = Archive/ArchiveFolderTableViewCell.swift; sourceTree = "<group>"; };
+		E2DF1BE81C0272D100F14F99 /* ArchiveNewFolderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveNewFolderTableViewCell.swift; sourceTree = "<group>"; };
 		E2E1B5801BFAE24500B878E6 /* Note Recorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Note Recorder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E1B5831BFAE24500B878E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2E1B5851BFAE24500B878E6 /* RecorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecorderViewController.swift; path = Recorder/RecorderViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +139,8 @@
 				E2E1B5A31BFAEEBE00B878E6 /* ArchiveTableViewController.swift */,
 				E2E1B5AA1BFAF97800B878E6 /* ArchiveTableViewCell.swift */,
 				E2C96E1B1BFB16310032D764 /* ArchiveFolderTableViewCell.swift */,
+				E236222F1C016FBF00DC30C1 /* EnterTextUIViewController.swift */,
+				E2DF1BE81C0272D100F14F99 /* ArchiveNewFolderTableViewCell.swift */,
 			);
 			name = Archive;
 			sourceTree = "<group>";
@@ -242,9 +248,11 @@
 				E2E1B5AB1BFAF97800B878E6 /* ArchiveTableViewCell.swift in Sources */,
 				E2E1B5A41BFAEEBE00B878E6 /* ArchiveTableViewController.swift in Sources */,
 				E2E1B5861BFAE24500B878E6 /* RecorderViewController.swift in Sources */,
+				E2DF1BE91C0272D100F14F99 /* ArchiveNewFolderTableViewCell.swift in Sources */,
 				E2C96E1A1BFB15300032D764 /* EditorViewController.swift in Sources */,
 				E2C96E1C1BFB16310032D764 /* ArchiveFolderTableViewCell.swift in Sources */,
 				E2E1B5841BFAE24500B878E6 /* AppDelegate.swift in Sources */,
+				E23622301C016FBF00DC30C1 /* EnterTextUIViewController.swift in Sources */,
 				E2496F3B1BFD71AF000F373F /* Folder.swift in Sources */,
 				E2496F3D1BFD75DA000F373F /* Recording.swift in Sources */,
 			);
