@@ -8,18 +8,18 @@
 
 import UIKit
 
-class ArchiveTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate{
+class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
 
     
     // MARK: Properties
+    
     
     
     var rootFolder: Folder!
     var currentFolder: Folder!
     var folderCount = 0
     var addButton: UIBarButtonItem!
-    var addFolder = 0 //Essentially a flag for if we're adding a new folder or not
-
+    var addFolderFlag = 0 //A flag for if we're adding a new folder or not
 
     
     override func viewDidLoad() {
@@ -93,10 +93,10 @@ class ArchiveTableViewController: UITableViewController, UIPopoverPresentationCo
         folderCount = 0 // Initialized here, used when configuring rows
         
         if(currentFolder.parent == nil){ //root folder
-            return currentFolder.folders.count + currentFolder.recordings.count + addFolder
+            return currentFolder.folders.count + currentFolder.recordings.count + addFolderFlag
         }
         
-        return currentFolder.folders.count + currentFolder.recordings.count + 1 + addFolder //Includes parent so you can navigate back
+        return currentFolder.folders.count + currentFolder.recordings.count + 1 + addFolderFlag //Includes parent so you can navigate back
         
     }
 
@@ -106,11 +106,13 @@ class ArchiveTableViewController: UITableViewController, UIPopoverPresentationCo
         
         // Adds a row to the top of the tableView if a folder is being added
         
-        if(addFolder == 1){
+        if(addFolderFlag == 1){
             
-            let cellIdentifier = "ArchiveNewFolderTableViewCell"
+            let cellIdentifier = "ArchiveNewTableViewCell"
             
             let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ArchiveNewFolderTableViewCell
+            
+            cell.nameTextField.delegate = self
             
             return cell
         
@@ -118,7 +120,7 @@ class ArchiveTableViewController: UITableViewController, UIPopoverPresentationCo
         
         //If the folder has a parent, include it as the top row so you can navigate back
         
-        if((indexPath.row == 0 && currentFolder.parent != nil) || (indexPath.row == 1 && currentFolder.parent != nil && addFolder == 1)){
+        if((indexPath.row == 0 && currentFolder.parent != nil) || (indexPath.row == 1 && currentFolder.parent != nil && addFolderFlag == 1)){
             
             // Table view cells are reused and should be dequeued using a cell identifer
             
@@ -126,11 +128,12 @@ class ArchiveTableViewController: UITableViewController, UIPopoverPresentationCo
             
             let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ArchiveFolderTableViewCell
             
-            // Fetches the appropriate data for the parent row
             
+            // Fetches the appropriate data for the parent row
+
             let title = currentFolder.parent!.name
             let folder = currentFolder.parent!
-            
+
             cell.folderLabel.text = title + " (Back)"
             cell.folder = folder
             
@@ -165,7 +168,7 @@ class ArchiveTableViewController: UITableViewController, UIPopoverPresentationCo
         // Add recordings rows if necessary
         // We want to use indexPath.row to get our recording array element, however we need to account for any folder rows that have been inserted so we subtract from indexPath the # of rows that we have created prior to this to get our desired element in the recording array
         
-        var adjustedRowIndex = indexPath.row - currentFolder.folders.count + addFolder // Subtracts based on folder rows inserted
+        var adjustedRowIndex = indexPath.row - currentFolder.folders.count - addFolderFlag // Subtracts based on folder rows inserted
         if(currentFolder.parent != nil){ // Subtracts if there is a parent row
             
             adjustedRowIndex -= 1
@@ -228,6 +231,8 @@ class ArchiveTableViewController: UITableViewController, UIPopoverPresentationCo
             
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             
+            saveFolder() // Save the rootFolder to reflect the deletion
+            
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
             
@@ -267,8 +272,73 @@ class ArchiveTableViewController: UITableViewController, UIPopoverPresentationCo
         
         return indexPath
     }
-
-
+    
+    func configureTableView() {
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 60.0
+    }
+    
+    
+    // MARK: UITextFieldDelegate
+    
+    // Is called before the textfield gives up its first responder status (when the user presses Done). We use it to hide the keyboard
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool{
+        
+        // Hide the keyboard
+        
+        textField.resignFirstResponder()
+        
+        return true
+    }
+    
+    // Called after textFieldShouldReturn. We create the new folder here
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        
+        let emptyFolder: [Folder] = []
+        let emptyRecording: [Recording] = []
+        
+        currentFolder.folders.append(Folder(name: textField.text!, parent: currentFolder, folders: emptyFolder, recordings: emptyRecording))
+        
+        tableView.reloadData()
+        
+        saveFolder() // Save the rootFolder to reflect the new folder
+        
+        textField.text = ""
+        
+        /*
+        // Delete the add folder row from the table
+        
+        tableView.beginUpdates()
+        
+        var indexPath: [NSIndexPath] = [NSIndexPath(forRow: 0, inSection: 0)]
+        
+        tableView.deleteRowsAtIndexPaths(indexPath, withRowAnimation: .Right)
+        
+        tableView.endUpdates()
+        
+    
+print(textField.text! + "************" + currentFolder.folders[currentFolder.folders.count - 1].name)
+        
+        // Add the new folder row to the table
+        
+        tableView.beginUpdates()
+        
+        indexPath = [NSIndexPath(forRow: currentFolder.folders.count - 1, inSection: 0)]
+        
+        tableView.insertRowsAtIndexPaths(indexPath, withRowAnimation: .Top)
+        
+        tableView.endUpdates()
+        
+        
+*/
+    }
+    
+    
+    
+    
+    
     
     // MARK: - Navigation
 
@@ -277,19 +347,19 @@ class ArchiveTableViewController: UITableViewController, UIPopoverPresentationCo
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
+        
+        saveFolder() // Save our rootFolder before the segue to be safe
+        
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        let popOver = segue.destinationViewController.popoverPresentationController
-        
-        popOver?.sourceRect = popOver!.sourceView!.bounds;
     }
     
     
     
     func addFolder(sender: UIBarButtonItem) {
         
-        addFolder = 1
+        addFolderFlag = 1
         
         tableView.beginUpdates()
         
@@ -299,7 +369,7 @@ class ArchiveTableViewController: UITableViewController, UIPopoverPresentationCo
         
         tableView.endUpdates()
         
-        addFolder = 0
+        addFolderFlag = 0
         
         /*
         let popoverViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EnterTextUIViewController") as UIViewController?
@@ -322,6 +392,29 @@ class ArchiveTableViewController: UITableViewController, UIPopoverPresentationCo
     //func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
   //      return .None
     //}
+    
+    
+    
+    // MARK: NSCoding
+    
+    // Save the rootFolder to disk
+    
+    func saveFolder(){
+        
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(rootFolder, toFile: Folder.ArchiveURL.path!)
+        
+        if !isSuccessfulSave {
+            
+            print("Failed to save rootFolder...")
+        }
+    }
+    
+    // Load data from disk
+    
+    func loadFolder() -> Folder {
+        
+        return NSKeyedUnarchiver.unarchiveObjectWithFile(Folder.ArchiveURL.path!) as! Folder
+    }
 
 }
 

@@ -8,7 +8,15 @@
 
 import UIKit
 
-class ArchiveNewFolderTableViewCell: UITableViewCell {
+class ArchiveNewFolderTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     @IBOutlet weak var nameTextField: UITextField!
+    
+    
+    
+
+   
+    
+
+    
 }

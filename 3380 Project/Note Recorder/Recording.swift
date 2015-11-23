@@ -14,6 +14,7 @@ class Recording{
     
     var name: String
     //var pins: [Pins] = [] removed for testing purposes
+    //var urlPath: NSURL // Playing & recording are based on the url of the audio file you pass to the function, so this is all we need to identify the recording
     
     
     // MARK: Types

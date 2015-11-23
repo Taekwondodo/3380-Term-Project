@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0Vv-rK-uj5">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Recorder-->
@@ -48,7 +49,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J06-IV-AEc">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J06-IV-AEc">
                                             <rect key="frame" x="8" y="0.0" width="584" height="21"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -57,6 +58,11 @@
                                         </label>
                                     </subviews>
                                     <animations/>
+                                    <constraints>
+                                        <constraint firstItem="J06-IV-AEc" firstAttribute="trailing" secondItem="CSR-wI-mDa" secondAttribute="trailingMargin" id="aNF-Se-2AU"/>
+                                        <constraint firstItem="J06-IV-AEc" firstAttribute="leading" secondItem="CSR-wI-mDa" secondAttribute="leadingMargin" id="cHL-iU-nuX"/>
+                                        <constraint firstItem="J06-IV-AEc" firstAttribute="top" secondItem="CSR-wI-mDa" secondAttribute="top" id="rtZ-QL-QFg"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <animations/>
                                 <connections>
@@ -64,26 +70,36 @@
                                     <segue destination="bKB-Nc-154" kind="presentation" id="Ahn-4b-9M6"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArchiveFolderTableViewCell" rowHeight="60" id="8rM-Aw-FHy" customClass="ArchiveFolderTableViewCell" customModule="Note_Recorder" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="751" selectionStyle="none" indentationWidth="10" reuseIdentifier="ArchiveFolderTableViewCell" rowHeight="60" id="8rM-Aw-FHy" customClass="ArchiveFolderTableViewCell" customModule="Note_Recorder" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="136" width="600" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8rM-Aw-FHy" id="KcN-aH-qGf">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="FolderIcon" translatesAutoresizingMaskIntoConstraints="NO" id="CEw-zT-LeU">
-                                            <rect key="frame" x="0.0" y="0.0" width="62" height="59"/>
-                                            <animations/>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Folder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAz-Ad-ir9">
-                                            <rect key="frame" x="70" y="19" width="522" height="24"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Folder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAz-Ad-ir9">
+                                            <rect key="frame" x="58" y="18" width="72" height="24"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FolderIcon" translatesAutoresizingMaskIntoConstraints="NO" id="CEw-zT-LeU">
+                                            <rect key="frame" x="8" y="0.0" width="42" height="60"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="42" id="urd-Xe-xh0"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <animations/>
+                                    <constraints>
+                                        <constraint firstItem="IAz-Ad-ir9" firstAttribute="leading" secondItem="CEw-zT-LeU" secondAttribute="trailing" constant="8" id="GdG-nI-6T2"/>
+                                        <constraint firstItem="CEw-zT-LeU" firstAttribute="centerY" secondItem="KcN-aH-qGf" secondAttribute="centerY" id="KHi-50-a9z"/>
+                                        <constraint firstItem="CEw-zT-LeU" firstAttribute="top" secondItem="KcN-aH-qGf" secondAttribute="top" id="ay4-Ab-qbG"/>
+                                        <constraint firstItem="CEw-zT-LeU" firstAttribute="leading" secondItem="KcN-aH-qGf" secondAttribute="leading" constant="8" id="dwa-CC-CB2"/>
+                                        <constraint firstItem="CEw-zT-LeU" firstAttribute="centerY" secondItem="IAz-Ad-ir9" secondAttribute="centerY" id="tuc-On-de3"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <animations/>
                                 <connections>
@@ -97,18 +113,29 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="FolderIcon" translatesAutoresizingMaskIntoConstraints="NO" id="egN-bg-6t9">
-                                            <rect key="frame" x="0.0" y="0.0" width="62" height="59"/>
-                                            <animations/>
-                                        </imageView>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Folder Name Here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XfC-0m-qdI">
-                                            <rect key="frame" x="70" y="15" width="522" height="30"/>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Folder Name Here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XfC-0m-qdI">
+                                            <rect key="frame" x="58" y="15" width="534" height="30"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         </textField>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FolderIcon" translatesAutoresizingMaskIntoConstraints="NO" id="egN-bg-6t9">
+                                            <rect key="frame" x="8" y="0.0" width="42" height="59"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="42" id="RD2-CT-3If"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <animations/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="egN-bg-6t9" secondAttribute="bottom" id="9Sd-hx-I3r"/>
+                                        <constraint firstItem="egN-bg-6t9" firstAttribute="leading" secondItem="ktD-UX-1sN" secondAttribute="leading" constant="8" id="Jz4-xc-zao"/>
+                                        <constraint firstItem="egN-bg-6t9" firstAttribute="top" secondItem="ktD-UX-1sN" secondAttribute="top" id="PMa-ZI-4xH"/>
+                                        <constraint firstItem="XfC-0m-qdI" firstAttribute="leading" secondItem="egN-bg-6t9" secondAttribute="trailing" constant="8" id="Vfg-K9-Vim"/>
+                                        <constraint firstItem="XfC-0m-qdI" firstAttribute="centerY" secondItem="egN-bg-6t9" secondAttribute="centerY" id="Xe5-HV-ihW"/>
+                                        <constraint firstItem="XfC-0m-qdI" firstAttribute="trailing" secondItem="ktD-UX-1sN" secondAttribute="trailingMargin" id="euT-Wk-XxI"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <animations/>
                                 <connections>
@@ -193,6 +220,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="FolderIcon" width="1024" height="1024"/>
+        <image name="FolderIcon" width="512" height="512"/>
     </resources>
 </document>
