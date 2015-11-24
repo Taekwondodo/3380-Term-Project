@@ -168,13 +168,38 @@
                     <view key="view" contentMode="scaleToFill" id="MoS-dc-xbf">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9gY-N2-gFz">
+                                <rect key="frame" x="20" y="72" width="560" height="269"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="269" id="Ghb-Pm-3gX"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IgC-tz-p86">
+                                <rect key="frame" x="277" y="349" width="46" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="IgC-tz-p86" firstAttribute="centerX" secondItem="9gY-N2-gFz" secondAttribute="centerX" id="43R-Mj-7Oi"/>
+                            <constraint firstItem="9gY-N2-gFz" firstAttribute="leading" secondItem="MoS-dc-xbf" secondAttribute="leadingMargin" id="O2Q-v9-nmp"/>
+                            <constraint firstItem="9gY-N2-gFz" firstAttribute="trailing" secondItem="MoS-dc-xbf" secondAttribute="trailingMargin" id="c8G-oy-n2J"/>
+                            <constraint firstItem="9gY-N2-gFz" firstAttribute="top" secondItem="v10-C3-YSV" secondAttribute="bottom" constant="8" symbolic="YES" id="cjR-p5-VRh"/>
+                            <constraint firstItem="IgC-tz-p86" firstAttribute="top" secondItem="9gY-N2-gFz" secondAttribute="bottom" constant="8" symbolic="YES" id="jhL-xn-s03"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Editor" id="W0d-Qg-1oZ">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="KGt-lT-8dP"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="UL4-gf-9lD"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="button" destination="IgC-tz-p86" id="0QD-uE-4cB"/>
+                        <outlet property="waveform" destination="9gY-N2-gFz" id="abm-UW-D39"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kGO-To-mc5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

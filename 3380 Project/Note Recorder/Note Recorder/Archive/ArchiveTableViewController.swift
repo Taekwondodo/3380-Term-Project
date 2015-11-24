@@ -176,6 +176,7 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
         }
         
         // Add recordings rows if necessary
+        
         // We want to use indexPath.row to get our recording array element, however we need to account for any folder rows that have been inserted so we subtract from indexPath the # of rows that we have created prior to this to get our desired element in the recording array
         
         var adjustedRowIndex = indexPath.row - currentFolder.folders.count - addFolderFlag // Subtracts based on folder rows inserted
@@ -202,10 +203,13 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
         
     }
     
-    
-    // Defines the height of a cell based on its class
+    //Commented out the following as it was causing memory issues, may look into later
     /*
+    // Defines the height of a cell based on its class
+    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
+        
+print("Issue: \(indexPath.row)")
         
         if let _ = tableView.cellForRowAtIndexPath(indexPath) as? ArchiveTableViewCell{
             
@@ -215,6 +219,7 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
         return CGFloat(60)
     }
 */
+
     
     
     // Override to support conditional editing of the table view.
@@ -288,11 +293,6 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
         
         
         return indexPath
-    }
-    
-    func configureTableView() {
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 60.0
     }
     
     
