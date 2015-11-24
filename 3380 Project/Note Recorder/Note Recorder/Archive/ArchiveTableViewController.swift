@@ -35,7 +35,17 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
         
         rootFolder = Folder(name: "Root", parent: nil, folders: rootFolderArray, recordings: rootRecordingArray)
         
-        loadTestData()
+
+        
+        rootFolder = loadFolder()
+        currentFolder = rootFolder
+        
+        // Need to remove once the recorder starts sending data
+        
+        if(rootFolder.folders.count == 0){
+            loadTestData()
+        }
+        
         
 
         // Uncomment the following line to preserve selection between presentations
@@ -193,8 +203,22 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
     }
     
     
+    // Defines the height of a cell based on its class
+    /*
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
+        
+        if let _ = tableView.cellForRowAtIndexPath(indexPath) as? ArchiveTableViewCell{
+            
+            return CGFloat(44)
+        }
+        
+        return CGFloat(60)
+    }
+*/
+    
     
     // Override to support conditional editing of the table view.
+    
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
         // We don't want the backwards navigation row to be able to be edited
@@ -204,13 +228,6 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
         }
         
         return true
-    }
-    
-    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-    
-        
-        
-        return UITableViewCellEditingStyle.Delete
     }
 
     
@@ -349,7 +366,7 @@ print(textField.text! + "************" + currentFolder.folders[currentFolder.fol
         
         
         saveFolder() // Save our rootFolder before the segue to be safe
-        
+        print("Saving")
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
@@ -407,6 +424,8 @@ print(textField.text! + "************" + currentFolder.folders[currentFolder.fol
             
             print("Failed to save rootFolder...")
         }
+        
+        print("Num: \(rootFolder.folders.count)")
     }
     
     // Load data from disk
