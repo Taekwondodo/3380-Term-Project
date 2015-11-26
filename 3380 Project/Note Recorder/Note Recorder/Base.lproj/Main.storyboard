@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0Vv-rK-uj5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0Vv-rK-uj5">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -63,7 +63,7 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dz8-p3-8Cm" id="CSR-wI-mDa">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J06-IV-AEc">
@@ -91,12 +91,15 @@
                                 <rect key="frame" x="0.0" y="136" width="600" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8rM-Aw-FHy" id="KcN-aH-qGf">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Folder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAz-Ad-ir9">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Folder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAz-Ad-ir9">
                                             <rect key="frame" x="58" y="18" width="72" height="24"/>
                                             <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="72" id="7qA-2l-XXH"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -108,18 +111,30 @@
                                                 <constraint firstAttribute="width" constant="42" id="urd-Xe-xh0"/>
                                             </constraints>
                                         </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qP0-R3-9EK">
+                                            <rect key="frame" x="546" y="9" width="46" height="40"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="46" id="6VQ-Jb-0uY"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                            <state key="normal" title="+"/>
+                                        </button>
                                     </subviews>
                                     <animations/>
                                     <constraints>
                                         <constraint firstItem="IAz-Ad-ir9" firstAttribute="leading" secondItem="CEw-zT-LeU" secondAttribute="trailing" constant="8" id="GdG-nI-6T2"/>
                                         <constraint firstItem="CEw-zT-LeU" firstAttribute="centerY" secondItem="KcN-aH-qGf" secondAttribute="centerY" id="KHi-50-a9z"/>
+                                        <constraint firstItem="qP0-R3-9EK" firstAttribute="trailing" secondItem="KcN-aH-qGf" secondAttribute="trailingMargin" id="RKW-LJ-U6H"/>
                                         <constraint firstItem="CEw-zT-LeU" firstAttribute="top" secondItem="KcN-aH-qGf" secondAttribute="top" id="ay4-Ab-qbG"/>
+                                        <constraint firstItem="qP0-R3-9EK" firstAttribute="baseline" secondItem="IAz-Ad-ir9" secondAttribute="baseline" id="diu-BZ-WzK"/>
                                         <constraint firstItem="CEw-zT-LeU" firstAttribute="leading" secondItem="KcN-aH-qGf" secondAttribute="leading" constant="8" id="dwa-CC-CB2"/>
                                         <constraint firstItem="CEw-zT-LeU" firstAttribute="centerY" secondItem="IAz-Ad-ir9" secondAttribute="centerY" id="tuc-On-de3"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <animations/>
                                 <connections>
+                                    <outlet property="expandFolderButton" destination="qP0-R3-9EK" id="UCw-mN-nab"/>
                                     <outlet property="folderLabel" destination="IAz-Ad-ir9" id="szO-Aa-hTg"/>
                                 </connections>
                             </tableViewCell>
@@ -127,7 +142,7 @@
                                 <rect key="frame" x="0.0" y="196" width="600" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cri-bm-KyQ" id="ktD-UX-1sN">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Folder Name Here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XfC-0m-qdI">

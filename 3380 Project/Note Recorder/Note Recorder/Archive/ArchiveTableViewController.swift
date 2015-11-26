@@ -350,28 +350,6 @@ print(textField.text! + "************" + currentFolder.folders[currentFolder.fol
 */
     }
     
-    
-    
-    
-    
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        
-        saveFolder() // Save our rootFolder before the segue to be safe
-        print("Saving")
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        
-    }
-    
-    
-    
     func addFolder(sender: UIBarButtonItem) {
         
         addFolderFlag = 1
@@ -379,7 +357,7 @@ print(textField.text! + "************" + currentFolder.folders[currentFolder.fol
         tableView.beginUpdates()
         
         let indexPath: [NSIndexPath] = [NSIndexPath(forRow: 0, inSection: 0)]
-
+        
         tableView.insertRowsAtIndexPaths(indexPath, withRowAnimation: .Top)
         
         tableView.endUpdates()
@@ -404,10 +382,27 @@ print(textField.text! + "************" + currentFolder.folders[currentFolder.fol
         */
     }
     
-    //func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-  //      return .None
-    //}
+
     
+    
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        
+        saveFolder() // Save our rootFolder before the segue to be safe
+        print("Saving")
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+    }
+    
+    
+    
+  
     
     
     // MARK: NSCoding
