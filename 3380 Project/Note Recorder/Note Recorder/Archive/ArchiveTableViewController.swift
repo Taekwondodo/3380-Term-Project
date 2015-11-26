@@ -35,8 +35,6 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
         
         rootFolder = Folder(name: "Root", parent: nil, folders: rootFolderArray, recordings: rootRecordingArray)
         
-
-        
         rootFolder = loadFolder()
         currentFolder = rootFolder
         
@@ -431,8 +429,9 @@ print(textField.text! + "************" + currentFolder.folders[currentFolder.fol
     // Load data from disk
     
     func loadFolder() -> Folder {
-        
-        return NSKeyedUnarchiver.unarchiveObjectWithFile(Folder.ArchiveURL.path!) as! Folder
+        print(Folder.ArchiveURL.path!)
+        let test = NSKeyedUnarchiver.unarchiveObjectWithFile(Folder.ArchiveURL.path!)
+        return test as! Folder
     }
 
 }

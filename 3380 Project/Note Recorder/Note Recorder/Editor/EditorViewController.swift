@@ -61,7 +61,7 @@ class EditorViewController: UIViewController {
         
         while(x <= maxX){
             
-            let randomHeight = Float(random()) % (height.native/2)
+            let randomHeight = Float((random())) % Float(height.native/2)
             
             CGContextBeginPath(context)
             CGContextMoveToPoint(context, x, height/2.0)
