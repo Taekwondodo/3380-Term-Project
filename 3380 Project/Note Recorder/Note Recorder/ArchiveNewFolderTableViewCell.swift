@@ -13,10 +13,4 @@ class ArchiveNewFolderTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var nameTextField: UITextField!
     
     
-    
-
-   
-    
-
-    
 }

@@ -8,7 +8,7 @@
         <!--Recorder-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Note_Recorder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="RecorderViewController" customModule="Note_Recorder" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -17,24 +17,50 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7lO-38-bvJ">
-                                <rect key="frame" x="111" y="285" width="60" height="30"/>
-                                <animations/>
-                                <state key="normal" title="Record"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fbi-NE-ML6">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fbi-NE-ML6">
                                 <rect key="frame" x="192" y="285" width="45" height="30"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="6aA-Uj-96x"/>
+                                </constraints>
                                 <state key="normal" title="Mark"/>
+                                <connections>
+                                    <action selector="markTime:" destination="BYZ-38-t0r" eventType="touchDown" id="sAO-cB-6Sb"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTq-xm-M8H">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTq-xm-M8H">
                                 <rect key="frame" x="260" y="285" width="40" height="30"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="EsF-Wt-YqX"/>
+                                </constraints>
                                 <state key="normal" title="Play"/>
+                                <connections>
+                                    <action selector="playSound:" destination="BYZ-38-t0r" eventType="touchDown" id="GT1-Jt-28E"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7lO-38-bvJ">
+                                <rect key="frame" x="108" y="285" width="60" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="moF-vN-zqn"/>
+                                </constraints>
+                                <state key="normal" title="Record"/>
+                                <connections>
+                                    <action selector="recordSound:" destination="BYZ-38-t0r" eventType="touchDown" id="i45-aD-wd2"/>
+                                </connections>
                             </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7lO-38-bvJ" firstAttribute="baseline" secondItem="Fbi-NE-ML6" secondAttribute="baseline" id="Jtp-jL-8LA"/>
+                            <constraint firstItem="7lO-38-bvJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="88" id="OYr-b1-TGo"/>
+                            <constraint firstItem="Fbi-NE-ML6" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Udt-r9-z11"/>
+                            <constraint firstItem="sTq-xm-M8H" firstAttribute="baseline" secondItem="Fbi-NE-ML6" secondAttribute="baseline" id="a6h-0n-zfu"/>
+                            <constraint firstItem="sTq-xm-M8H" firstAttribute="leading" secondItem="Fbi-NE-ML6" secondAttribute="trailing" constant="23" id="jMX-BQ-G8V"/>
+                            <constraint firstItem="Fbi-NE-ML6" firstAttribute="leading" secondItem="7lO-38-bvJ" secondAttribute="trailing" constant="24" id="nxC-BR-Oxu"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Recorder" id="NB9-um-LyT">
                         <barButtonItem key="leftBarButtonItem" title="Archive" id="pTc-0C-XGJ">
@@ -44,10 +70,15 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Options" id="cQp-J0-k8N"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="MarkTimeBtn" destination="Fbi-NE-ML6" id="KIx-WR-XW9"/>
+                        <outlet property="PlayBtn" destination="sTq-xm-M8H" id="vYy-69-Vux"/>
+                        <outlet property="RecordBtn" destination="7lO-38-bvJ" id="vtc-SI-1xP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1427" y="210"/>
+            <point key="canvasLocation" x="1427" y="218"/>
         </scene>
         <!--Archive Table View Controller-->
         <scene sceneID="hwQ-Bn-Heq">
@@ -95,10 +126,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Folder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAz-Ad-ir9">
-                                            <rect key="frame" x="58" y="18" width="72" height="24"/>
+                                            <rect key="frame" x="58" y="18" width="480" height="24"/>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="72" id="7qA-2l-XXH"/>
+                                                <constraint firstAttribute="width" constant="480" id="7qA-2l-XXH"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -134,7 +165,7 @@
                                 </tableViewCellContentView>
                                 <animations/>
                                 <connections>
-                                    <outlet property="expandFolderButton" destination="qP0-R3-9EK" id="UCw-mN-nab"/>
+                                    <outlet property="expandFolderButton" destination="qP0-R3-9EK" id="qP7-RB-080"/>
                                     <outlet property="folderLabel" destination="IAz-Ad-ir9" id="szO-Aa-hTg"/>
                                 </connections>
                             </tableViewCell>

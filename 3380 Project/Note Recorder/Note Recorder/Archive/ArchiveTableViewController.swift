@@ -13,37 +13,47 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
     
     // MARK: Properties
     
-    
-    
     var rootFolder: Folder!
     var currentFolder: Folder!
     var folderCount = 0
     var addButton: UIBarButtonItem!
     var addFolderFlag = 0 //A flag for if we're adding a new folder or not
-
+    var newRecording: Recording?
+    
+    // Used for error handling
+    
+    enum ArchiveError: ErrorType {
+        
+        case FolderDoesntExist
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Insert the '+' button in the navigation bar
+        
         addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addFolder:")
         self.navigationItem.rightBarButtonItems = [addButton]
         
-        // May not need all of this root setup when we're loading data from memory
+        // Setup the root folder incase no rootFolder exists on disk
         
         let rootFolderArray: [Folder] = []
         let rootRecordingArray: [Recording] = []
         
         rootFolder = Folder(name: "Root", parent: nil, folders: rootFolderArray, recordings: rootRecordingArray)
+        saveFolder()
+        // This try...catch is here so the program doesn't crash if the folder doesn't exists when we go to load data
+        // Nothing happens within because regardless we want to pass rootFolder to currentFolder
         
-        rootFolder = loadFolder()
-        currentFolder = rootFolder
-        
-        // Need to remove once the recorder starts sending data
-        
-        if(rootFolder.folders.count == 0){
-            loadTestData()
+        do {
+            try rootFolder = loadFolder()
+        } catch ArchiveError.FolderDoesntExist {
+            
+        } catch {
+            
         }
         
+        currentFolder = rootFolder
         
 
         // Uncomment the following line to preserve selection between presentations
@@ -52,6 +62,7 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         //self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
+        // TESTING: newRecording = Recording(name: "Test", pins: [Pin](), urlPath: NSURL())
 
     }
 
@@ -60,32 +71,9 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
         // Dispose of any resources that can be recreated.
     }
     
-    
-    func loadTestData(){ // for testing purposes, will be removed in final version
-        
-        let emptyFolder: [Folder] = []
-        let emptyRecording: [Recording] = []
-        
-        let dummyFolder = Folder(name: "empty1", parent: rootFolder, folders: emptyFolder, recordings: emptyRecording)
-        let dummyArray = [dummyFolder, dummyFolder]
-        let tempRecording1 = Recording(name: "sub1")
-        let tempRecording2 = Recording(name: "sub2")
-        let recordingArray: [Recording] = [tempRecording1, tempRecording2]
-        tempRecording1.name = "3"
-        tempRecording2.name = "4"
-        let recordingArray2: [Recording] = [tempRecording1, tempRecording2]
-        
-        let tempFolder1 = Folder(name: "1", parent: rootFolder, folders: dummyArray, recordings: recordingArray)
-        let tempFolder2 = Folder(name: "2", parent: rootFolder, folders: dummyArray, recordings: recordingArray2)
-        let folderArray: [Folder] = [tempFolder1, tempFolder2]
-     
-        rootFolder.folders = folderArray
-        rootFolder.recordings = recordingArray
-        currentFolder = rootFolder
-    }
-    
 
     // MARK: - Table view data source
+    
     
     // Determines the number of sections in the tableView
 
@@ -100,11 +88,24 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
         
         folderCount = 0 // Initialized here, used when configuring rows
         
-        if(currentFolder.parent == nil){ //root folder
-            return currentFolder.folders.count + currentFolder.recordings.count + addFolderFlag
+        // If we are accessing the archive via the 'Archive' button in the recording screen
+        
+        if(newRecording == nil){
+            
+            if(currentFolder.parent == nil){ //root folder
+                return currentFolder.folders.count + currentFolder.recordings.count + addFolderFlag
+            }
+            
+            return currentFolder.folders.count + currentFolder.recordings.count + 1 + addFolderFlag //Includes parent so you can navigate back
         }
         
-        return currentFolder.folders.count + currentFolder.recordings.count + 1 + addFolderFlag //Includes parent so you can navigate back
+        // If we are accessing the archive in order to save a recording to a folder, in which case we don't want to show recordings
+        
+        if(currentFolder.parent == nil){ //root folder
+            return currentFolder.folders.count + addFolderFlag
+        }
+        
+        return currentFolder.folders.count + 1 + addFolderFlag //Includes parent so you can navigate back
         
     }
 
@@ -141,7 +142,8 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
 
             let title = currentFolder.parent!.name
             let folder = currentFolder.parent!
-
+            
+            cell.expandFolderButton.hidden = true // Since this is for backwards navigation, we don't want the expandFolder button
             cell.folderLabel.text = title + " (Back)"
             cell.folder = folder
             
@@ -166,6 +168,13 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
             
             cell.folderLabel.text = title
             cell.folder = folder
+            
+            // If we're accessing the archive in order to save a recording, we use the expand folder button to expand the folder instead of the cell itself (since selecting the cell is how we determine where we save the recording)
+            
+            if(newRecording != nil){
+                cell.expandFolderButton.hidden = false
+                cell.viewController = self
+            }
             
             folderCount++
             
@@ -282,15 +291,74 @@ print("Issue: \(indexPath.row)")
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath?{
         
         //Checks if cell is a folder
+        
         if let selectedCell = tableView.cellForRowAtIndexPath(indexPath) as? ArchiveFolderTableViewCell {
             
             currentFolder = selectedCell.folder
             
-            tableView.reloadData()
+            // Determines whether we're saving to a folder or not
+            
+            //We want the backwards navigation button (the parent) to function regardless of if we're saving to a folder
+            if(newRecording == nil || (currentFolder.parent == nil && indexPath.row == 0)){
+                
+                tableView.reloadData()
+            }
+            else {
+                
+                selectedCell.selectionStyle = UITableViewCellSelectionStyle.Blue
+                
+                // We configure an Alert dialogue so the user can confirm they want to save to the chosen folder
+                
+                // Block of code that is run when the user confirms to save the recording
+                let saveActionHandler = {(action: UIAlertAction!) -> Void in
+                    
+                    // We add the recording to the chosen folder, save, then return to the view that called the Archive
+                
+                    self.currentFolder.recordings.append(self.newRecording!)
+                    self.saveFolder() // TESTING: Remove for testing. Until we start getting real data from the recorder, there will be an issue with having nil for the propreties of the Recordings
+                    self.newRecording == nil // Set to nil so the archive is in its 'Search the Archive' state again
+                    self.navigationController!.popViewControllerAnimated(true)
+                }
+                
+                // Block of code that is run when the user cancels out
+                let cancelActionHandler = {(action: UIAlertAction!) -> Void in
+                    selectedCell.selected = false
+                }
+                
+                // The save button
+                let saveAction = UIAlertAction(title: "Ok", style: .Default, handler: saveActionHandler)
+                // The cancel button
+                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelActionHandler)
+                
+                let saveMessage = "Save \(newRecording!.name) to \(currentFolder.name)?"
+                // The alert controller itself
+                let saveAlert = UIAlertController(title: "Archive", message: saveMessage, preferredStyle: .Alert)
+                
+                saveAlert.addAction(saveAction)
+                saveAlert.addAction(cancelAction)
+                
+                self.presentViewController(saveAlert, animated: true, completion: nil)
+                
+            }
+            
         }
         
         
         return indexPath
+    }
+    
+    func addFolder(sender: UIBarButtonItem) {
+        
+        addFolderFlag = 1
+        
+        tableView.beginUpdates()
+        
+        let indexPath: [NSIndexPath] = [NSIndexPath(forRow: 0, inSection: 0)]
+        tableView.insertRowsAtIndexPaths(indexPath, withRowAnimation: .Top)
+        tableView.endUpdates()
+        
+        addFolderFlag = 0
+        
     }
     
     
@@ -350,41 +418,7 @@ print(textField.text! + "************" + currentFolder.folders[currentFolder.fol
 */
     }
     
-    func addFolder(sender: UIBarButtonItem) {
-        
-        addFolderFlag = 1
-        
-        tableView.beginUpdates()
-        
-        let indexPath: [NSIndexPath] = [NSIndexPath(forRow: 0, inSection: 0)]
-        
-        tableView.insertRowsAtIndexPaths(indexPath, withRowAnimation: .Top)
-        
-        tableView.endUpdates()
-        
-        addFolderFlag = 0
-        
-        /*
-        let popoverViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EnterTextUIViewController") as UIViewController?
-        popoverViewController?.modalPresentationStyle = UIModalPresentationStyle.Popover
-        
-        let popOver = self.popoverPresentationController
-        popOver!.permittedArrowDirections = .Any
-        popOver!.delegate = self
-        popOver!.barButtonItem = sender as UIBarButtonItem
-        popOver!.popoverLayoutMargins = UIEdgeInsetsMake(300, 300, 300, 300)
-        
-        
-        presentViewController(popoverViewController!, animated: true, completion: nil)
-        
-        
-        self.performSegueWithIdentifier("enterFolderName", sender: addButton)
-        */
-    }
-    
 
-    
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -399,9 +433,6 @@ print(textField.text! + "************" + currentFolder.folders[currentFolder.fol
         // Pass the selected object to the new view controller.
         
     }
-    
-    
-    
   
     
     
@@ -418,15 +449,20 @@ print(textField.text! + "************" + currentFolder.folders[currentFolder.fol
             print("Failed to save rootFolder...")
         }
         
-        print("Num: \(rootFolder.folders.count)")
     }
     
     // Load data from disk
     
-    func loadFolder() -> Folder {
-        print(Folder.ArchiveURL.path!)
-        let test = NSKeyedUnarchiver.unarchiveObjectWithFile(Folder.ArchiveURL.path!)
-        return test as! Folder
+    func loadFolder() throws -> Folder {
+        
+        // Throws an error if the folder does not exist
+        
+        guard let test = NSKeyedUnarchiver.unarchiveObjectWithFile(Folder.ArchiveURL.path!) as? Folder else {
+            
+            throw ArchiveError.FolderDoesntExist
+        }
+        
+        return test
     }
 
 }

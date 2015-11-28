@@ -6,7 +6,7 @@
 //  Copyright © 2015 Michael Vedros. All rights reserved.
 //
 
-import UIKit //NSObject & NSCoding
+import UIKit 
 
 //Tried simulating a linked list/tree type structure here. If parent = NULL then it is the root
 

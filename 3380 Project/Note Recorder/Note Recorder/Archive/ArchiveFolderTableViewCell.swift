@@ -11,15 +11,24 @@ import UIKit
 class ArchiveFolderTableViewCell: UITableViewCell {
 
     var folder: Folder!
+    var viewController: ArchiveTableViewController! // Referenced in expandFolder()
     @IBOutlet weak var folderLabel: UILabel!
+    @IBOutlet weak var expandFolderButton: UIButton!
     
-    
-/*
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        expandFolderButton.hidden = true
+        expandFolderButton.addTarget(self, action: "expandFolder", forControlEvents: .TouchDown)
     }
-
+    
+    func expandFolder(){
+        
+        viewController.currentFolder = folder
+        viewController.tableView.reloadData()
+    }
+    
+/*
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
