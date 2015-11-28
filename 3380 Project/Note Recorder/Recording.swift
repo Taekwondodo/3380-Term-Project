@@ -13,52 +13,46 @@ class Recording: NSObject, NSCoding{
     // MARK: Properties
     
     var name: String
-    //var pins: [Pin] = [] removed for testing purposes
-    //var urlPath: NSURL // Playing & recording are based on the url of the audio file you pass to the function, so this is all we need to identify the recording
+    var pins: [Pin] = []
+    var urlPath: NSURL // Playing & recording are based on the url of the audio file you pass to the function, so this is all we need to identify the recording
     
     
     // MARK: Types
     
-    //We could just do a 2-dim array instead, but I thought a struct was a bit cleaner
     //We can use NSDate to parse/manipulate/whatever the strings. The following is a reference
     //http://stackoverflow.com/questions/24089999/how-do-you-create-a-swift-date-object
     
-    struct Pin{
-        var comment: String?
-        var timestamp: String
-    }
-    
+
     struct PropertyKey{
         
         static let nameKey = "name"
-        //static let pinKey = "pin"
-        //static let urlPathKey = "urlPath"
+        static let pinsKey = "pins"
+        static let urlPathKey = "urlPath"
     }
     
     
     // MARK: Initialization
     
-    init(name: String) {
+    init(name: String, pins: [Pin], urlPath: NSURL) {
     
         // Initialize stored parameters
         
         self.name = name
-        //self.pins += pin
+        self.pins = pins
+        self.urlPath = urlPath
      
         // Call parent initializer
         
         super.init()
     }
     
-    // MAR: NSCoding
-    
     // MARK: NSCoding
     
     func encodeWithCoder(aCoder: NSCoder) {
         
         aCoder.encodeObject(name, forKey: PropertyKey.nameKey)
-        //aCoder.encodeObject(pin, forKey:PropertyKey.pinKey)
-        //aCoder.encodeObject(urlPath, forKey:PropertyKey.urlPath)
+        aCoder.encodeObject(pins, forKey: PropertyKey.pinsKey)
+        aCoder.encodeObject(urlPath, forKey: PropertyKey.urlPathKey)
         
     }
     
@@ -73,14 +67,13 @@ class Recording: NSObject, NSCoding{
         
         let name = aDecoder.decodeObjectForKey(PropertyKey.nameKey) as! String
         
-        //let pins = aDecoder.decodeObjectForKey(PropertyKey.pinKey) as! [Pin]
+        let pins = aDecoder.decodeObjectForKey(PropertyKey.pinsKey) as! [Pin]
         
-        //let urlPath = aDecoder.decodeObjectForKey(PropertyKey.urlPathKey) as! NSURL
+        let urlPath = aDecoder.decodeObjectForKey(PropertyKey.urlPathKey) as! NSURL
         
         // Must call designated initializer
         
-        self.init(name: name)//testing initializer, will use following for final
-        //self.init(name: name, pins: pins, urlPath: urlPath)
+        self.init(name: name, pins: pins, urlPath: urlPath)
     }
     
 }
