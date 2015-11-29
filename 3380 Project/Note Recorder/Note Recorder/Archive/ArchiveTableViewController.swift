@@ -19,6 +19,7 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
     var addButton: UIBarButtonItem!
     var addFolderFlag = 0 //A flag for if we're adding a new folder or not
     var newRecording: Recording?
+    var previousController: UIViewController?
     
     // Used for error handling
     
@@ -29,11 +30,17 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Insert the '+' button in the navigation bar
         
         addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addFolder:")
         self.navigationItem.rightBarButtonItems = [addButton]
+        
+        // Change the navigation bar title if we are saving a recording
+        
+        if(newRecording != nil){
+            self.navigationItem.title = "Save Recording"
+        }
         
         // Setup the root folder incase no rootFolder exists on disk
         
@@ -212,24 +219,6 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
         
     }
     
-    //Commented out the following as it was causing memory issues, may look into later
-    /*
-    // Defines the height of a cell based on its class
-    
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
-        
-print("Issue: \(indexPath.row)")
-        
-        if let _ = tableView.cellForRowAtIndexPath(indexPath) as? ArchiveTableViewCell{
-            
-            return CGFloat(44)
-        }
-        
-        return CGFloat(60)
-    }
-*/
-
-    
     
     // Override to support conditional editing of the table view.
     
@@ -318,7 +307,9 @@ print("Issue: \(indexPath.row)")
                 
                     self.currentFolder.recordings.append(self.newRecording!)
                     self.saveFolder() // TESTING: Remove for testing. Until we start getting real data from the recorder, there will be an issue with having nil for the propreties of the Recordings
+                    
                     self.newRecording == nil // Set to nil so the archive is in its 'Search the Archive' state again
+                    //self.previousController.recording = newRecording
                     self.navigationController!.popViewControllerAnimated(true)
                 }
                 
@@ -392,32 +383,6 @@ print("Issue: \(indexPath.row)")
         
         textField.text = ""
         
-        /*
-        // Delete the add folder row from the table
-        
-        tableView.beginUpdates()
-        
-        var indexPath: [NSIndexPath] = [NSIndexPath(forRow: 0, inSection: 0)]
-        
-        tableView.deleteRowsAtIndexPaths(indexPath, withRowAnimation: .Right)
-        
-        tableView.endUpdates()
-        
-    
-print(textField.text! + "************" + currentFolder.folders[currentFolder.folders.count - 1].name)
-        
-        // Add the new folder row to the table
-        
-        tableView.beginUpdates()
-        
-        indexPath = [NSIndexPath(forRow: currentFolder.folders.count - 1, inSection: 0)]
-        
-        tableView.insertRowsAtIndexPaths(indexPath, withRowAnimation: .Top)
-        
-        tableView.endUpdates()
-        
-        
-*/
     }
     
 

@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E228356A1C0BA80100BD751D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E22835691C0BA80100BD751D /* UIKit.framework */; };
+		E228356C1C0BA83400BD751D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E228356B1C0BA83400BD751D /* CoreGraphics.framework */; };
+		E228356E1C0BA83D00BD751D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E228356D1C0BA83D00BD751D /* QuartzCore.framework */; };
+		E22835701C0BA84600BD751D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E228356F1C0BA84600BD751D /* AVFoundation.framework */; };
+		E228357E1C0BAAC100BD751D /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C96E191BFB15300032D764 /* EditorViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		E22835861C0BABBD00BD751D /* SCScrollableWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = E22835801C0BABBD00BD751D /* SCScrollableWaveformView.m */; settings = {ASSET_TAGS = (); }; };
+		E22835871C0BABBD00BD751D /* SCWaveformCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E22835821C0BABBD00BD751D /* SCWaveformCache.m */; settings = {ASSET_TAGS = (); }; };
+		E22835881C0BABBD00BD751D /* SCWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = E22835841C0BABBD00BD751D /* SCWaveformView.m */; settings = {ASSET_TAGS = (); }; };
+		E228358B1C0BB3E800BD751D /* TchaikovskyExample2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = E22835891C0BB3E800BD751D /* TchaikovskyExample2.m4a */; settings = {ASSET_TAGS = (); }; };
+		E228358C1C0BB3E800BD751D /* test.m4a in Resources */ = {isa = PBXBuildFile; fileRef = E228358A1C0BB3E800BD751D /* test.m4a */; settings = {ASSET_TAGS = (); }; };
 		E22D84D11C094979005067C8 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D84CF1C094661005067C8 /* Pin.swift */; settings = {ASSET_TAGS = (); }; };
 		E2496F3B1BFD71AF000F373F /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2496F3A1BFD71AF000F373F /* Folder.swift */; settings = {ASSET_TAGS = (); }; };
 		E2496F3D1BFD75DA000F373F /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2496F3C1BFD75DA000F373F /* Recording.swift */; settings = {ASSET_TAGS = (); }; };
@@ -36,9 +46,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E22835691C0BA80100BD751D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E228356B1C0BA83400BD751D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E228356D1C0BA83D00BD751D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E228356F1C0BA84600BD751D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		E228357F1C0BABBD00BD751D /* SCScrollableWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCScrollableWaveformView.h; sourceTree = SOURCE_ROOT; };
+		E22835801C0BABBD00BD751D /* SCScrollableWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCScrollableWaveformView.m; sourceTree = SOURCE_ROOT; };
+		E22835811C0BABBD00BD751D /* SCWaveformCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCWaveformCache.h; sourceTree = SOURCE_ROOT; };
+		E22835821C0BABBD00BD751D /* SCWaveformCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCWaveformCache.m; sourceTree = SOURCE_ROOT; };
+		E22835831C0BABBD00BD751D /* SCWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCWaveformView.h; sourceTree = SOURCE_ROOT; };
+		E22835841C0BABBD00BD751D /* SCWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCWaveformView.m; sourceTree = SOURCE_ROOT; };
+		E22835891C0BB3E800BD751D /* TchaikovskyExample2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = TchaikovskyExample2.m4a; sourceTree = "<group>"; };
+		E228358A1C0BB3E800BD751D /* test.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.m4a; sourceTree = "<group>"; };
 		E22D84CF1C094661005067C8 /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
 		E2496F3A1BFD71AF000F373F /* Folder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Folder.swift; path = "Note Recorder/Folder.swift"; sourceTree = "<group>"; };
 		E2496F3C1BFD75DA000F373F /* Recording.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
+		E2B337171C0BA00E00042E3D /* Note Recorder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Note Recorder-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		E2B337411C0BA4A700042E3D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		E2C96E191BFB15300032D764 /* EditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditorViewController.swift; path = Editor/EditorViewController.swift; sourceTree = "<group>"; };
 		E2C96E1B1BFB16310032D764 /* ArchiveFolderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArchiveFolderTableViewCell.swift; path = Archive/ArchiveFolderTableViewCell.swift; sourceTree = "<group>"; };
 		E2DF1BE81C0272D100F14F99 /* ArchiveNewFolderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveNewFolderTableViewCell.swift; sourceTree = "<group>"; };
@@ -61,6 +85,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E22835701C0BA84600BD751D /* AVFoundation.framework in Frameworks */,
+				E228356E1C0BA83D00BD751D /* QuartzCore.framework in Frameworks */,
+				E228356C1C0BA83400BD751D /* CoreGraphics.framework in Frameworks */,
+				E228356A1C0BA80100BD751D /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +105,12 @@
 		E2E1B5771BFAE24400B878E6 = {
 			isa = PBXGroup;
 			children = (
+				E22835891C0BB3E800BD751D /* TchaikovskyExample2.m4a */,
+				E228358A1C0BB3E800BD751D /* test.m4a */,
+				E228356F1C0BA84600BD751D /* AVFoundation.framework */,
+				E228356D1C0BA83D00BD751D /* QuartzCore.framework */,
+				E228356B1C0BA83400BD751D /* CoreGraphics.framework */,
+				E22835691C0BA80100BD751D /* UIKit.framework */,
 				E22D84CF1C094661005067C8 /* Pin.swift */,
 				E2496F3C1BFD75DA000F373F /* Recording.swift */,
 				E2496F3A1BFD71AF000F373F /* Folder.swift */,
@@ -130,6 +164,13 @@
 		E2E1B5A61BFAF40400B878E6 /* Editor */ = {
 			isa = PBXGroup;
 			children = (
+				E228357F1C0BABBD00BD751D /* SCScrollableWaveformView.h */,
+				E22835801C0BABBD00BD751D /* SCScrollableWaveformView.m */,
+				E2B337171C0BA00E00042E3D /* Note Recorder-Bridging-Header.h */,
+				E22835811C0BABBD00BD751D /* SCWaveformCache.h */,
+				E22835821C0BABBD00BD751D /* SCWaveformCache.m */,
+				E22835831C0BABBD00BD751D /* SCWaveformView.h */,
+				E22835841C0BABBD00BD751D /* SCWaveformView.m */,
 				E2C96E191BFB15300032D764 /* EditorViewController.swift */,
 			);
 			name = Editor;
@@ -190,6 +231,7 @@
 		E2E1B5781BFAE24400B878E6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Michael Vedros";
 				TargetAttributes = {
@@ -227,8 +269,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2E1B58E1BFAE24500B878E6 /* LaunchScreen.storyboard in Resources */,
+				E228358C1C0BB3E800BD751D /* test.m4a in Resources */,
 				E2E1B58B1BFAE24500B878E6 /* Assets.xcassets in Resources */,
 				E2E1B5891BFAE24500B878E6 /* Main.storyboard in Resources */,
+				E228358B1C0BB3E800BD751D /* TchaikovskyExample2.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,11 +291,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2E1B5AB1BFAF97800B878E6 /* ArchiveTableViewCell.swift in Sources */,
+				E22835871C0BABBD00BD751D /* SCWaveformCache.m in Sources */,
 				E2E1B5A41BFAEEBE00B878E6 /* ArchiveTableViewController.swift in Sources */,
 				E2E1B5861BFAE24500B878E6 /* RecorderViewController.swift in Sources */,
+				E22835881C0BABBD00BD751D /* SCWaveformView.m in Sources */,
 				E2DF1BE91C0272D100F14F99 /* ArchiveNewFolderTableViewCell.swift in Sources */,
 				E2C96E1A1BFB15300032D764 /* EditorViewController.swift in Sources */,
 				E22D84D11C094979005067C8 /* Pin.swift in Sources */,
+				E22835861C0BABBD00BD751D /* SCScrollableWaveformView.m in Sources */,
 				E2C96E1C1BFB16310032D764 /* ArchiveFolderTableViewCell.swift in Sources */,
 				E2E1B5841BFAE24500B878E6 /* AppDelegate.swift in Sources */,
 				E2496F3B1BFD71AF000F373F /* Folder.swift in Sources */,
@@ -266,6 +313,7 @@
 				E28400E31C09502200104BFD /* Pin.swift in Sources */,
 				E2E1B5991BFAE24500B878E6 /* Note_RecorderTests.swift in Sources */,
 				E2496F3E1BFD75DA000F373F /* Recording.swift in Sources */,
+				E228357E1C0BAAC100BD751D /* EditorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +332,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				E2E1B5881BFAE24500B878E6 /* Base */,
+				E2B337411C0BA4A700042E3D /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -384,10 +433,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Note Recorder/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Note-Recorder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Note Recorder-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -395,10 +451,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Note Recorder/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Note-Recorder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Note Recorder-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -406,6 +468,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Note RecorderTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Note-RecorderTests";
@@ -418,6 +484,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Note RecorderTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Note-RecorderTests";

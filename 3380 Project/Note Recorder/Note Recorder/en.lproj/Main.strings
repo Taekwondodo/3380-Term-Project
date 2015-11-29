@@ -1,0 +1,42 @@
+
+/* Class = "UIButton"; normalTitle = "Stop"; ObjectID = "1Ym-yo-NF3"; */
+"1Ym-yo-NF3.normalTitle" = "Stop";
+
+/* Class = "UIButton"; normalTitle = "Record"; ObjectID = "7lO-38-bvJ"; */
+"7lO-38-bvJ.normalTitle" = "Record";
+
+/* Class = "UILabel"; text = "0.5X"; ObjectID = "EyN-lO-HeY"; */
+"EyN-lO-HeY.text" = "0.5X";
+
+/* Class = "UIButton"; normalTitle = "Mark"; ObjectID = "Fbi-NE-ML6"; */
+"Fbi-NE-ML6.normalTitle" = "Mark";
+
+/* Class = "UILabel"; text = "Folder"; ObjectID = "IAz-Ad-ir9"; */
+"IAz-Ad-ir9.text" = "Folder";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "J06-IV-AEc"; */
+"J06-IV-AEc.text" = "Title";
+
+/* Class = "UINavigationItem"; title = "Recorder"; ObjectID = "NB9-um-LyT"; */
+"NB9-um-LyT.title" = "Recorder";
+
+/* Class = "UIButton"; normalTitle = "Play"; ObjectID = "SPZ-SP-OGy"; */
+"SPZ-SP-OGy.normalTitle" = "Play";
+
+/* Class = "UITextField"; placeholder = "Enter Folder Name Here"; ObjectID = "XfC-0m-qdI"; */
+"XfC-0m-qdI.placeholder" = "Enter Folder Name Here";
+
+/* Class = "UIBarButtonItem"; title = "Options"; ObjectID = "cQp-J0-k8N"; */
+"cQp-J0-k8N.title" = "Options";
+
+/* Class = "UIButton"; normalTitle = "Next Pin"; ObjectID = "g64-os-cOE"; */
+"g64-os-cOE.normalTitle" = "Next Pin";
+
+/* Class = "UIBarButtonItem"; title = "Archive"; ObjectID = "pTc-0C-XGJ"; */
+"pTc-0C-XGJ.title" = "Archive";
+
+/* Class = "UIButton"; normalTitle = "+"; ObjectID = "qP0-R3-9EK"; */
+"qP0-R3-9EK.normalTitle" = "+";
+
+/* Class = "UIButton"; normalTitle = "Play"; ObjectID = "sTq-xm-M8H"; */
+"sTq-xm-M8H.normalTitle" = "Play";
