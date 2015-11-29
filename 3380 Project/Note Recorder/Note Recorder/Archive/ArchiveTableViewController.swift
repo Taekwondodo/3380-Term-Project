@@ -53,6 +53,8 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
             
         }
         
+        let testRecording = Recording(name: "Test")
+        rootFolder.recordings.append(testRecording)
         currentFolder = rootFolder
         
 
