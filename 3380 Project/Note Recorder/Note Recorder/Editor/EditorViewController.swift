@@ -17,19 +17,18 @@ class EditorViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var speedLabel: UILabel!
     
-    
-    let recordingName = "test"
+    var recording: Recording!
+    var recordingName: String!
     let recordingType = "m4a"
     // test pin timestamps
-    let timeStampArray: [Float64] = [2.3,4.4,10.5,11.2,14.0]
-    var pinArrayMax = 4
+    var timeStampArray: [Float64] = []
+    var pinArrayMax: Int!
     //var max = timeStampArray.endIndex
     var i: Int = 0
     var j: Int = 0
     // test pin timestamps
     
-    
-    var playAudioURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("test",ofType: "m4a")!)
+    var playAudioURL: NSURL!
     var playAudioPlayer = AVPlayer()
     //var playRecPlayer = AVAudioPlayer()
     
@@ -48,6 +47,16 @@ class EditorViewController: UIViewController, UITextFieldDelegate {
         // } catch{
         //     print(error)
         // }
+        
+        recordingName = recording.name
+        pinArrayMax = recording.pins.count
+        playAudioURL = recording.urlPath
+
+        for pin in recording.pins{
+            timeStampArray.append(Float64(pin.timeStamp))
+        
+        }
+        
         self.navigationItem.title = recordingName // Replaces the title label
         speedLabel.text = "1.0X"
         

@@ -18,6 +18,7 @@ class RecorderViewController: UIViewController,AVAudioPlayerDelegate, AVAudioRec
     @IBOutlet weak var enterNameField: UITextField!
     
     // Create instances of recorder and player.
+    
     var recording: Recording!
     var pins: [Pin] = []
     var soundRecorder : AVAudioRecorder!
@@ -236,7 +237,7 @@ class RecorderViewController: UIViewController,AVAudioPlayerDelegate, AVAudioRec
     func textFieldDidEndEditing(textField: UITextField) {
         
         let oldFileURL = RecorderViewController.getFileURL()
-        let path = RecorderViewController.getCacheDirectory().stringByAppendingPathComponent(textField.text!)
+        let path = RecorderViewController.getCacheDirectory().stringByAppendingPathComponent(textField.text! + ".m4a")
         let newFileURL = NSURL(fileURLWithPath: path)
         
         let file = NSFileManager()
@@ -245,12 +246,12 @@ class RecorderViewController: UIViewController,AVAudioPlayerDelegate, AVAudioRec
         do {
             try file.copyItemAtURL(oldFileURL, toURL: newFileURL)
         }catch{
-            
+            print("Didn't work")
         }
         
         // setup recording to pass to Archive
         
-        recording = Recording(name: textField.text!, pins: pins, urlPath: newFileURL)
+        self.recording = Recording(name: textField.text!, pins: pins, urlPath: newFileURL)
         
         // hide the text field for when we return
         
@@ -268,7 +269,7 @@ class RecorderViewController: UIViewController,AVAudioPlayerDelegate, AVAudioRec
         if(sender === enterNameField){
             
             let destination = segue.destinationViewController as? ArchiveTableViewController
-            destination?.newRecording = recording
+            destination?.newRecording = self.recording
         }
         
     }

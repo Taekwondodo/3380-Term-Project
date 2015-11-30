@@ -48,7 +48,7 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
         let rootRecordingArray: [Recording] = []
         
         rootFolder = Folder(name: "Root", parent: nil, folders: rootFolderArray, recordings: rootRecordingArray)
-        
+     
         // This try...catch is here so the program doesn't crash if the folder doesn't exists when we go to load data
         // Nothing happens within because regardless we want to pass rootFolder to currentFolder
         
@@ -394,9 +394,11 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
         // preparing the recording for the segue to the editor
         
         if let cell = sender as? ArchiveTableViewCell{
+
+            let navController = segue.destinationViewController as? UINavigationController
+            let destination = navController?.viewControllers[0] as? EditorViewController
             
-            let destination = segue.destinationViewController as? EditorViewController
-            // TODO: destination.recording = cell.recording
+            destination!.recording = cell.recording
             
         }
         
