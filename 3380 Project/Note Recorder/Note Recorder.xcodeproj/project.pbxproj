@@ -11,7 +11,6 @@
 		E228356C1C0BA83400BD751D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E228356B1C0BA83400BD751D /* CoreGraphics.framework */; };
 		E228356E1C0BA83D00BD751D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E228356D1C0BA83D00BD751D /* QuartzCore.framework */; };
 		E22835701C0BA84600BD751D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E228356F1C0BA84600BD751D /* AVFoundation.framework */; };
-		E228357E1C0BAAC100BD751D /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C96E191BFB15300032D764 /* EditorViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		E22835861C0BABBD00BD751D /* SCScrollableWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = E22835801C0BABBD00BD751D /* SCScrollableWaveformView.m */; settings = {ASSET_TAGS = (); }; };
 		E22835871C0BABBD00BD751D /* SCWaveformCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E22835821C0BABBD00BD751D /* SCWaveformCache.m */; settings = {ASSET_TAGS = (); }; };
 		E22835881C0BABBD00BD751D /* SCWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = E22835841C0BABBD00BD751D /* SCWaveformView.m */; settings = {ASSET_TAGS = (); }; };
@@ -22,6 +21,9 @@
 		E2496F3D1BFD75DA000F373F /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2496F3C1BFD75DA000F373F /* Recording.swift */; settings = {ASSET_TAGS = (); }; };
 		E2496F3E1BFD75DA000F373F /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2496F3C1BFD75DA000F373F /* Recording.swift */; settings = {ASSET_TAGS = (); }; };
 		E28400E31C09502200104BFD /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D84CF1C094661005067C8 /* Pin.swift */; settings = {ASSET_TAGS = (); }; };
+		E29F83331C0C20A90041C2D4 /* SCWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = E22835841C0BABBD00BD751D /* SCWaveformView.m */; settings = {ASSET_TAGS = (); }; };
+		E29F83341C0C20AD0041C2D4 /* SCWaveformCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E22835821C0BABBD00BD751D /* SCWaveformCache.m */; settings = {ASSET_TAGS = (); }; };
+		E29F83351C0C20B00041C2D4 /* SCScrollableWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = E22835801C0BABBD00BD751D /* SCScrollableWaveformView.m */; settings = {ASSET_TAGS = (); }; };
 		E2C96E1A1BFB15300032D764 /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C96E191BFB15300032D764 /* EditorViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		E2C96E1C1BFB16310032D764 /* ArchiveFolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C96E1B1BFB16310032D764 /* ArchiveFolderTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		E2DF1BE91C0272D100F14F99 /* ArchiveNewFolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DF1BE81C0272D100F14F99 /* ArchiveNewFolderTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
@@ -311,9 +313,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E28400E31C09502200104BFD /* Pin.swift in Sources */,
+				E29F83341C0C20AD0041C2D4 /* SCWaveformCache.m in Sources */,
+				E29F83331C0C20A90041C2D4 /* SCWaveformView.m in Sources */,
 				E2E1B5991BFAE24500B878E6 /* Note_RecorderTests.swift in Sources */,
+				E29F83351C0C20B00041C2D4 /* SCScrollableWaveformView.m in Sources */,
 				E2496F3E1BFD75DA000F373F /* Recording.swift in Sources */,
-				E228357E1C0BAAC100BD751D /* EditorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

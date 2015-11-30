@@ -243,7 +243,7 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
                 currentFolder.folders.removeAtIndex(indexPath.row)
             }
             else{
-                currentFolder.recordings.removeAtIndex(indexPath.row - currentFolder.folders.count)
+                currentFolder.recordings.removeAtIndex(indexPath.row - currentFolder.folders.count - 1)
             }
             
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)

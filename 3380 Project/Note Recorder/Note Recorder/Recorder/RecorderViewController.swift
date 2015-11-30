@@ -239,7 +239,7 @@ class RecorderViewController: UIViewController,AVAudioPlayerDelegate, AVAudioRec
         let oldFileURL = RecorderViewController.getFileURL()
         let path = RecorderViewController.getCacheDirectory().stringByAppendingPathComponent(textField.text! + ".m4a")
         let newFileURL = NSURL(fileURLWithPath: path)
-        
+        print("BEFORE: " + newFileURL.absoluteString)
         let file = NSFileManager()
         
         // copy the file and give it a new path reflecting the name given to it
@@ -248,7 +248,7 @@ class RecorderViewController: UIViewController,AVAudioPlayerDelegate, AVAudioRec
         }catch{
             print("Didn't work")
         }
-        
+        print("AFTER: " + newFileURL.absoluteString)
         // setup recording to pass to Archive
         
         self.recording = Recording(name: textField.text!, pins: pins, urlPath: newFileURL)
