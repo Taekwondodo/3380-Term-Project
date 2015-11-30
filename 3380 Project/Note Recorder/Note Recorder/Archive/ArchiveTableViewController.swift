@@ -48,7 +48,7 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
         let rootRecordingArray: [Recording] = []
         
         rootFolder = Folder(name: "Root", parent: nil, folders: rootFolderArray, recordings: rootRecordingArray)
-        saveFolder()
+        
         // This try...catch is here so the program doesn't crash if the folder doesn't exists when we go to load data
         // Nothing happens within because regardless we want to pass rootFolder to currentFolder
         
@@ -60,8 +60,6 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
             
         }
         
-        let testRecording = Recording(name: "Test")
-        rootFolder.recordings.append(testRecording)
         currentFolder = rootFolder
         
 
@@ -71,7 +69,6 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         //self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        // TESTING: newRecording = Recording(name: "Test", pins: [Pin](), urlPath: NSURL())
 
     }
 
@@ -336,7 +333,6 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
             
         }
         
-        
         return indexPath
     }
     
@@ -392,12 +388,17 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        
+    
         saveFolder() // Save our rootFolder before the segue to be safe
-        print("Saving")
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        // preparing the recording for the segue to the editor
+        
+        if let cell = sender as? ArchiveTableViewCell{
+            
+            let destination = segue.destinationViewController as? EditorViewController
+            // TODO: destination.recording = cell.recording
+            
+        }
         
     }
   

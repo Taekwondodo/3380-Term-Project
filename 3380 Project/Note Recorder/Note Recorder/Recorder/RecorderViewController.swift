@@ -8,14 +8,18 @@
 
 import UIKit
 import AVFoundation
+import Foundation
 
-class RecorderViewController: UIViewController,AVAudioPlayerDelegate, AVAudioRecorderDelegate {
+class RecorderViewController: UIViewController,AVAudioPlayerDelegate, AVAudioRecorderDelegate, UITextFieldDelegate {
     // Create outlets for buttons on storyboard.
     @IBOutlet weak var RecordBtn: UIButton!
     @IBOutlet weak var PlayBtn: UIButton!
     @IBOutlet weak var MarkTimeBtn: UIButton!
+    @IBOutlet weak var enterNameField: UITextField!
     
     // Create instances of recorder and player.
+    var recording: Recording!
+    var pins: [Pin] = []
     var soundRecorder : AVAudioRecorder!
     var soundPlayer : AVAudioPlayer!
     var timeMarked = [NSTimeInterval]()
@@ -26,6 +30,10 @@ class RecorderViewController: UIViewController,AVAudioPlayerDelegate, AVAudioRec
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.navigationItem.rightBarButtonItem!.enabled = false
+        
+        enterNameField.delegate = self
+        enterNameField.hidden = true // Only show when user is inputting name
         
         setupRecorder()
     }
@@ -44,6 +52,7 @@ class RecorderViewController: UIViewController,AVAudioPlayerDelegate, AVAudioRec
             MarkTimeBtn.enabled = true
         } else {
             soundRecorder.stop()
+            self.navigationItem.rightBarButtonItem!.enabled = true // Enable save button
             sender.setTitle("Record", forState: .Normal)
             PlayBtn.enabled = false
         }
@@ -68,6 +77,9 @@ class RecorderViewController: UIViewController,AVAudioPlayerDelegate, AVAudioRec
     // Add current time of recording at moment when "Mark" button is clicked.
     @IBAction func markTime(sender: UIButton) {
         timeMarked.append(round(100*soundRecorder.currentTime)/100)
+        // Testing
+        let tempPin = Pin(comment: nil, timeStamp: round(100*soundRecorder.currentTime)/100)
+        pins.append(tempPin)
         print(soundRecorder.currentTime)
         addButton()
         i++
@@ -199,4 +211,121 @@ class RecorderViewController: UIViewController,AVAudioPlayerDelegate, AVAudioRec
         RecordBtn.enabled = true
         PlayBtn.setTitle("Play", forState: .Normal)
     }
+    
+    // The save Button action
+    
+    @IBAction func enterName(){
+        
+        enterNameField.hidden = false
+        
+    }
+    
+    // MARK: UITextFieldDelegate
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool{
+        
+        // Hide the keyboard
+        
+        textField.resignFirstResponder()
+        
+        return true
+    }
+    
+    // What we do after the user finishes entering the recording name
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        
+        let oldFileURL = RecorderViewController.getFileURL()
+        let path = RecorderViewController.getCacheDirectory().stringByAppendingPathComponent(textField.text!)
+        let newFileURL = NSURL(fileURLWithPath: path)
+        
+        let file = NSFileManager()
+        
+        // copy the file and give it a new path reflecting the name given to it
+        do {
+            try file.copyItemAtURL(oldFileURL, toURL: newFileURL)
+        }catch{
+            
+        }
+        
+        // setup recording to pass to Archive
+        
+        recording = Recording(name: textField.text!, pins: pins, urlPath: newFileURL)
+        
+        // hide the text field for when we return
+        
+        textField.hidden = true
+        
+        self.performSegueWithIdentifier("toArchive", sender: enterNameField)
+    
+    }
+
+    
+    // MARK: Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if(sender === enterNameField){
+            
+            let destination = segue.destinationViewController as? ArchiveTableViewController
+            destination?.newRecording = recording
+        }
+        
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

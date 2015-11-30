@@ -52,30 +52,44 @@
                                     <action selector="recordSound:" destination="BYZ-38-t0r" eventType="touchDown" id="i45-aD-wd2"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Recording Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="34l-za-hTb">
+                                <rect key="frame" x="20" y="562" width="560" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="7lO-38-bvJ" firstAttribute="baseline" secondItem="Fbi-NE-ML6" secondAttribute="baseline" id="Jtp-jL-8LA"/>
+                            <constraint firstItem="34l-za-hTb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="MFi-ov-O7I"/>
                             <constraint firstItem="7lO-38-bvJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="88" id="OYr-b1-TGo"/>
                             <constraint firstItem="Fbi-NE-ML6" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Udt-r9-z11"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="34l-za-hTb" secondAttribute="bottom" constant="8" symbolic="YES" id="Yh2-fN-8hO"/>
                             <constraint firstItem="sTq-xm-M8H" firstAttribute="baseline" secondItem="Fbi-NE-ML6" secondAttribute="baseline" id="a6h-0n-zfu"/>
                             <constraint firstItem="sTq-xm-M8H" firstAttribute="leading" secondItem="Fbi-NE-ML6" secondAttribute="trailing" constant="23" id="jMX-BQ-G8V"/>
                             <constraint firstItem="Fbi-NE-ML6" firstAttribute="leading" secondItem="7lO-38-bvJ" secondAttribute="trailing" constant="24" id="nxC-BR-Oxu"/>
+                            <constraint firstItem="34l-za-hTb" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="u57-ma-yq9"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Recorder" id="NB9-um-LyT">
                         <barButtonItem key="leftBarButtonItem" title="Archive" id="pTc-0C-XGJ">
                             <connections>
-                                <segue destination="8ak-lH-KTi" kind="show" id="F6a-7G-1Hb"/>
+                                <segue destination="8ak-lH-KTi" kind="show" identifier="toArchive" id="F6a-7G-1Hb"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Options" id="cQp-J0-k8N"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="3Rn-f2-cWz">
+                            <connections>
+                                <action selector="enterName" destination="BYZ-38-t0r" id="tq9-5C-XLq"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="MarkTimeBtn" destination="Fbi-NE-ML6" id="KIx-WR-XW9"/>
                         <outlet property="PlayBtn" destination="sTq-xm-M8H" id="vYy-69-Vux"/>
                         <outlet property="RecordBtn" destination="7lO-38-bvJ" id="vtc-SI-1xP"/>
+                        <outlet property="enterNameField" destination="34l-za-hTb" id="mNk-mi-P5E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -117,7 +131,7 @@
                                 <animations/>
                                 <connections>
                                     <outlet property="titleLabel" destination="J06-IV-AEc" id="y8t-sT-FcK"/>
-                                    <segue destination="bKB-Nc-154" kind="presentation" id="Ahn-4b-9M6"/>
+                                    <segue destination="bKB-Nc-154" kind="presentation" identifier="editSegue" id="Ahn-4b-9M6"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="751" selectionStyle="none" indentationWidth="10" reuseIdentifier="ArchiveFolderTableViewCell" rowHeight="60" id="8rM-Aw-FHy" customClass="ArchiveFolderTableViewCell" customModule="Note_Recorder" customModuleProvider="target">
@@ -432,7 +446,13 @@
                             <constraint firstItem="g64-os-cOE" firstAttribute="leading" secondItem="SPZ-SP-OGy" secondAttribute="trailing" constant="69" id="zXQ-nS-8mT"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="iIJ-0W-oNG"/>
+                    <navigationItem key="navigationItem" id="iIJ-0W-oNG">
+                        <barButtonItem key="leftBarButtonItem" title="Archive" id="F42-hB-du8">
+                            <connections>
+                                <action selector="dismiss:" destination="zyQ-ke-zmC" id="Ytb-cW-sby"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="playButton" destination="SPZ-SP-OGy" id="TL2-us-hcL"/>
                         <outlet property="slider" destination="3va-Y8-3Lv" id="7B4-MG-pPV"/>

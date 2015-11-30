@@ -48,6 +48,7 @@ class EditorViewController: UIViewController, UITextFieldDelegate {
         // } catch{
         //     print(error)
         // }
+        self.navigationItem.title = recordingName // Replaces the title label
         speedLabel.text = "1.0X"
         
         self.waveform.waveformView.precision = 1 //prevly,scrollableWaveformView
@@ -247,5 +248,119 @@ class EditorViewController: UIViewController, UITextFieldDelegate {
     
     // }
 
-
+    
+    // MARK: Navigation
+    
+    // If the user decides to return to the Archive
+    
+    @IBAction func dismiss(sender: UIBarButtonItem){
+        
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    // We won't need this if we aren't altering the audio file
+    /*
+    // Preparing for the save
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        let destination = segue.destinationViewController as? ArchiveTableViewController
+        
+        destination?.previousController = self
+        
+        // TODO: Pass your recording here
+        // destination?.newRecording = yourRecording
+        
+    }
+    */
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
