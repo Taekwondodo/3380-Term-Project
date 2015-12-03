@@ -39,6 +39,7 @@
     NSMutableArray *_waveforms;
     SCWaveformLayerDelegate *_waveformLayersDelegate;
     CALayer *_waveformSuperlayer;
+    int _dirrty;
     int _firstVisibleIdx;
     BOOL _graphDirty;
     //
@@ -102,21 +103,12 @@
     //
 }
 
-//
-//
-//
 - (void)setAudioURL:(NSURL *)audioURL
 {
     audioURL = audioURL;
-   // self.loadingInProgress = YES;
-  //  if ([self.delegate respondsToSelector:@selector(waveformViewWillLoad:)])
-   //     [self.delegate waveformViewWillLoad:self];
     self.asset = [AVURLAsset URLAssetWithURL:audioURL options:nil];
  }
 
-//
-//
-//
 
 - (NSUInteger)_prepareLayers:(CGFloat)pixelRatio {
     NSUInteger numberOfLayers = (NSUInteger)ceil(pixelRatio * self.bounds.size.width) + 1;
@@ -216,7 +208,7 @@
                 }
             }
         }
-        
+        _dirrty = dirtyRange.length;
         _firstVisibleIdx = newFirstVisibleIdx;
         _waveformSuperlayer.frame = waveformSuperlayerFrame;
         
@@ -444,26 +436,14 @@
     }
 }
 
-//
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return YES;
 }
-- (void)handleTapGesture:(UITapGestureRecognizer *)recognizer
+- (void)handleTapGesture:(UITapGestureRecognizer *)theTapRecognizer
 {
-    //
-    int64_t xCoord = [recognizer locationInView:self].x;
-    int32_t preferredTimeScale = timePerPixel.value;
-    
-    //self.progressTime = CMTimeMake(xCoord, preferredTimeScale);
-    self.progressTime = CMTimeMake(10,1);
-    //layer.waveformTime = CMTimeMake(10,1);
-    //self.asset
-    //CMTime([recognizer locationInView:self].x / self.bounds.size.width);
- //   if (self.doesAllowScrubbing) {
-  //      self.progressTime = [recognizer locationInView:self].x / self.bounds.size.width;
-  //
-   //     self.progressSamples = self.zoomStartSamples + (float)(self.zoomEndSamples-self.zoomStartSamples) * [recognizer locationInView:self].x / self.bounds.size.width;
-   // }
+    Float64 xCoord;
+    xCoord = [theTapRecognizer locationInView:self.superview].x;
+    [self.audioPlayer seekToTime:CMTimeMultiplyByFloat64(_timeRange.duration, xCoord/self.frame.size.width)];
 }
 
 //

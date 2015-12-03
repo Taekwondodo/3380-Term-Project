@@ -89,7 +89,7 @@ class RecorderViewController: UIViewController,AVAudioPlayerDelegate, AVAudioRec
     // Add button for each time marked when "Mark" button is clicked.
     func addButton() {
         let button = UIButton(type: UIButtonType.System) as UIButton
-        button.frame = CGRectMake(60, 300+(32*x), 300, 50)
+        button.frame = CGRectMake(60, 360+(32*x), 300, 50)
         button.backgroundColor = UIColor.whiteColor()
         button.setTitle(String(timeMarked[i]), forState: .Normal)
         button.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)

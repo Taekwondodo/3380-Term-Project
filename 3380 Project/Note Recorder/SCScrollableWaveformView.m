@@ -42,10 +42,17 @@ static char *ScrollableWaveformContentOffsetContext = "ScrollableWaveformContent
 
 - (void)_commonInit {
     //
-    self.panGestureRecognizer.minimumNumberOfTouches = 2;
+    self.panGestureRecognizer.minimumNumberOfTouches = 1;
     
    // self.autoresizingMask = UIViewAutoresizing.FlexibleWidth
     //self.contentOffset = CGPoint(x:0,y:0)
+    self.minimumZoomScale=0.5;
+    
+    self.maximumZoomScale=6.0;
+    
+    self.contentSize=CGSizeMake(1280, 960);
+    
+    self.delegate=self;
     //
     _waveformView = [SCWaveformView new];
     [_waveformView addObserver:self forKeyPath:@"asset" options:NSKeyValueObservingOptionNew context:WaveformAssetContext];

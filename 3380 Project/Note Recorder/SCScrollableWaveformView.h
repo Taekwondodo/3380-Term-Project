@@ -10,6 +10,7 @@
 #import "SCWaveformView.h"
 
 @class SCWaveformView;
+//@class MyAVPlayer;
 
 @interface SCScrollableWaveformView : UIScrollView
 

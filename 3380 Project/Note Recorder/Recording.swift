@@ -13,8 +13,8 @@ class Recording: NSObject, NSCoding{
     // MARK: Properties
     
     var name: String
-    var pins: [Pin] = []
-    var urlPath: NSURL // Playing & recording are based on the url of the audio file you pass to the function, so this is all we need to identify the recording
+    var pins: [Pin]?
+    var urlPath: NSURL? // Playing & recording are based on the url of the audio file you pass to the function, so this is all we need to identify the recording
     
     
     // MARK: Types
@@ -33,7 +33,7 @@ class Recording: NSObject, NSCoding{
     
     // MARK: Initialization
     
-    init(name: String, pins: [Pin], urlPath: NSURL) {
+    init(name: String, pins: [Pin]?, urlPath: NSURL?) {
         
         // Initialize stored parameters
         
@@ -67,9 +67,9 @@ class Recording: NSObject, NSCoding{
         
         let name = aDecoder.decodeObjectForKey(PropertyKey.nameKey) as! String
         
-        let pins = aDecoder.decodeObjectForKey(PropertyKey.pinsKey) as! [Pin]
+        let pins = aDecoder.decodeObjectForKey(PropertyKey.pinsKey) as? [Pin]
         
-        let urlPath = aDecoder.decodeObjectForKey(PropertyKey.urlPathKey) as! NSURL
+        let urlPath = aDecoder.decodeObjectForKey(PropertyKey.urlPathKey) as? NSURL
         
         // Must call designated initializer
         

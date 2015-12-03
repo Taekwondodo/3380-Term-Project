@@ -397,6 +397,7 @@ class ArchiveTableViewController: UITableViewController, UITextFieldDelegate{
 
             let navController = segue.destinationViewController as? UINavigationController
             let destination = navController?.viewControllers[0] as? EditorViewController
+print("Archive")
             
             destination!.recording = cell.recording
             

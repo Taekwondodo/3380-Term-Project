@@ -11,12 +11,14 @@
 #import <UIKit/UIKit.h>
 #import "SCWaveformCache.h"
 #import "SCScrollableWaveformView.h" // For convenience
+//#import "MyAVPlayer.h"
 
 @interface SCWaveformView : UIView
 
 //
 @property (nonatomic, strong) NSURL *audioURL;
 @property (nonatomic, strong) AVPlayer *audioPlayer;
+@property (nonatomic, strong) NSMutableArray *pinTimes;
 //
 
 /**
