@@ -53,7 +53,7 @@ print("\(playAudioURL.absoluteString)")
                 commentArray.append(" ")
             }
         
-        self.navigationItem.title = recordingName
+        self.navigationItem.title = recording.name
         speedLabel.text = "1.0X"
         self.waveform.waveformView.precision = 1
         
@@ -74,11 +74,11 @@ print("\(playAudioURL.absoluteString)")
         self.waveform.waveformView.timeRange = CMTimeRangeMake(CMTimeMakeWithSeconds(15, 10000), progressTime);
         
         
-      //  do{
-     //       playAudioPlayer = try AVPlayer(URL: playAudioURL)
-      //  } catch {
-      //      print(error)
-      //  }
+        do{
+            playAudioPlayer = try AVPlayer(URL: playAudioURL)
+        } catch {
+           print(error)
+        }
 
      
         self.waveform.waveformView.audioPlayer = playAudioPlayer
